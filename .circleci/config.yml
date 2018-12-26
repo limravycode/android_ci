@@ -1,23 +1,21 @@
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
+
 version: 2
 jobs:
-  general:
-    artifacts:
-        - /home/ubuntu/androidci/app/build/outputs/apk/
+  
+    general:
+      artifacts:
+        - /home/ubuntu/your-app-name/app/build/outputs/apk/
 
-  machine:
-    environment:
+    machine:
+      environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
 
- dependencies:
-    override:
+    dependencies:
+       override:
         - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
         - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
- test:
-    override:
-        - (./gradlew assemble):
+    test:
+      override:
+          - (./gradlew assemble):
             timeout: 360
